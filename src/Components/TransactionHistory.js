@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
+import Transaction from './Transaction';
 
 // import the global context
-import { GlobalContext } from "../Context/GlobalState";
-
-// import Transaction
-import Transaction from "./Transaction";
+import { GlobalContext } from '../Context/GlobalState';
 
 const TransactionHistory = () => {
   const { transactions } = useContext(GlobalContext);
