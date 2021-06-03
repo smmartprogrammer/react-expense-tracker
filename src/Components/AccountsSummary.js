@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
 
-function AccountsSummary() {
+export const AccountsSummary = () => {
   const { transactions } = useContext(GlobalContext);
 
-  const amounts = transactions.map((transaction) => transaction.amount);
+  const transactionAmounts = transactions.map(
+    (transaction) => transaction.transactionAmount,
+  );
 
-  const income = amounts
-    .filter((item) => item > 0)
-    .reduce((acc, item) => (acc += item), 0)
+  const income = transactionAmounts
+    .filter((transaction) => transaction > 0)
+    .reduce((acc, transaction) => (acc += transaction), 0)
     .toFixed(2);
 
-  const expense = (
-    amounts.filter((item) => item < 0).reduce((acc, item) => (acc += item), 0) *
-    -1
+  const expense = Math.abs(
+    transactionAmounts
+      .filter((transaction) => transaction < 0)
+      .reduce((acc, transaction) => (acc += transaction), 0),
   ).toFixed(2);
 
   return (
@@ -28,6 +31,6 @@ function AccountsSummary() {
       </div>
     </div>
   );
-}
+};
 
 export default AccountsSummary;
